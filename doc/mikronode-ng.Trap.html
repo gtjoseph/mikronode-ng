@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: index.js</title>
+    <title>Class: Trap</title>
     
     
     
@@ -255,101 +255,472 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="index.js.html">Source: index.js</h1>
+        <h1 class="page-title" data-filename="mikronode-ng.Trap.html">Class: Trap</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre class="prettyprint source "><code>/* Polyfill needed for private-parts */
-if (!('WeakMap' in global)) {
-	global.WeakMap = require('weakmap');
-}
+<header>
+    <h2>
+        <span class="ancestors"><a href="mikronode-ng.html">mikronode-ng</a>.</span>
+    
+    Trap
+    </h2>
+    
+</header>  
 
-/* Polyfill needed for Connection */
-if (!('Promise' in global)) {
-	global.Promise = require('es6-promise').Promise;
-}
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Trap">
+            
+            new mikronode-ng.Trap<span class="signature">(<span class="optional">message</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="trap.js.html">trap.js</a>, <a href="trap.js.html#line30">line 30</a>
+        </div>
+        
+    </div>
 
-/**
- * MikroNode
- * @exports mikronode-ng
- * @namespace
- */
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Wrapper for traps sent from device</p>
+    </div>
+    
 
-var Connection = require('./connection');
-module.exports.Connection = Connection;
-var Channel = require('./channel');
-module.exports.Channel = Channel;
+    
+    
+    
+    
+    
+        
 
-/**
- * Creates or returns a Connection object.
- * @exports mikronode-ng.getConnection
- * @function
- * @static
- * @param {string} host - The host name or ip address
- * @param {string} user - The user name
- * @param {string} password - The users password
- * @param {object} [options]
- * @param {number} [options.port=8728] - Sets the port if not the standard 8728 (8729 for
- *           TLS).
- * @param {boolean} [options.closeOnDone=false] - If set, when the last channel closes,
- *           the connection will automatically close.
- * @param {number} [options.timeout=0] - Sets the socket inactivity timeout. A timeout
- *           does not necessarily mean that an error has occurred, especially if you're
- *           only listening for events.
- * @param {boolean} [options.closeOnTimeout=false] - If set, when a socket timeout happens
- *           the connection will automatically close.
- * @param {(object|boolean)} [options.tls] - Set to true to use TLS for this connection.
- *           Set to an object to use TLS and pass the object to tls.connect as the tls
- *           options. If your device uses self-signed certificates, you'll either have to
- *           set 'rejectUnauthorized : false' or supply the proper CA certificate. See the
- *           options for
- *           {@link https://nodejs.org/api/tls.html#tls_tls_connect_port_host_options_callback|tls.connect()}
- *           for more info.
- * @fires mikronode-ng.Connection#event:trap
- * @fires mikronode-ng.Connection#event:error
- * @throws &lt;strong>WARNING: If you do not listen for 'error' or 'timeout' events and one
- *            occurrs during the initial connection (host unreachable, connection refused,
- *            etc.), an "Unhandled 'error' event" exception will be thrown.&lt;/strong>
- * @fires mikronode-ng.Connection#event:timeout
- * @fires mikronode-ng.Connection#event:close
- * 
- * @example
- * 
- * &lt;pre>
- * var MikroNode = require('mikronode-ng');
- * 
- * var connection = MikroNode.getConnection('192.168.88.1', 'admin', 'mypassword', {
- * 	timeout : 4,
- * 	closeOnDone : true,
- * 	closeOnTimeout : true,
- * });
- * 
- * connection.on('error', function(err) {
- * 	console.error('Error: ', err);
- * });
- * 
- * &lt;/pre>
- */
-module.exports.getConnection = function getConnection(host, user, password, options) {
-	return new Connection(host, user, password, options);
-};
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-/**
- * Parse !re return records into an array of objects
- * @exports mikronode-ng.parseItems
- * @function
- * @static
- * @param {string[]} data - The data[] returned from Channel.on('done')
- * @returns {object[]} - An Array of objects
- */
-module.exports.parseItems = Connection.parseItems;
-</code></pre>
-        </article>
-    </section>
 
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="channel">channel</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>channel</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="mikronode-ng.Channel.html">mikronode-ng.Channel</a></span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>The channel originating the trap</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="channelId">channelId</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>channelId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>The id of the channel originating the trap</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="errors">errors</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>errors</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="mikronode-ng.TrapError.html">mikronode-ng.TrapError</a>></span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>Since multiple traps can be<br>          recieved from a single command, this array captures them all.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+    
+    
+</article>
+
+</section>  
 
 
 
