@@ -9,15 +9,15 @@
       "email": "george.joseph@fairview5.com"
     }
   ],
-  "homepage": "http://trakkasure.github.io/mikronode",
+  "homepage": "http://f5eng.github.io/mikronode-ng",
   "license": "MIT",
   "keywords": [
     "mikrotik",
     "socket",
     "api"
   ],
-  "repository": "git://github.com/trakkasure/mikronode",
-  "bugs": "https://github.com/trakassure/mikronode/issues",
+  "repository": "git://github.com/f5eng/mikronode-ng",
+  "bugs": "https://github.com/f5eng/mikronode-ng/issues",
   "main": "lib/index",
   "engines": {
     "node": ">= 0.10.36"
