@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: trap.js</title>
+    <title>Class: Trap</title>
     
     
     
@@ -255,73 +255,472 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="trap.js.html">Source: trap.js</h1>
+        <h1 class="page-title" data-filename="mikronode-ng.Trap.html">Class: Trap</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre class="prettyprint source "><code>module.exports = (function() {
+<header>
+    <h2>
+        <span class="ancestors"><a href="mikronode-ng.html">mikronode-ng</a>.</span>
+    
+    Trap
+    </h2>
+    
+</header>  
 
-	/**
-	 * 
-	 * @exports mikronode-ng.TrapError
-	 * @class
-	 */
-	function TrapError() {
-		/**
-		 * @property {string} [category=''] - The category of the trap. Some traps don't
-		 *           populate the category.
-		 */
-		this.category = '';
-		/**
-		 * @property {string} message- The message
-		 */
-		this.message = '';
-		this.toString = function() {
-			return this.message + '(' + this.category + ')';
-		};
-	}
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Trap">
+            
+            new mikronode-ng.Trap<span class="signature">(<span class="optional">message</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="trap.js.html">trap.js</a>, <a href="trap.js.html#line30">line 30</a>
+        </div>
+        
+    </div>
 
-	/**
-	 * Wrapper for traps sent from device
-	 * 
-	 * @exports mikronode-ng.Trap
-	 * @class
-	 * @param {string} [message]
-	 */
-	function Trap() {
-		/**
-		 * @property {mikronode-ng.TrapError[]} errors - Since multiple traps can be
-		 *           recieved from a single command, this array captures them all.
-		 */
-		this.errors = [ new TrapError() ];
-		/**
-		 * @property {string} [channelId] - The id of the channel originating the trap
-		 */
-		this.channelId = '';
-		/**
-		 * @property {mikronode-ng.Channel} [channel] - The channel originating the trap
-		 */
-		this.channel = null;
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Wrapper for traps sent from device</p>
+    </div>
+    
 
-		this.toString = function() {
-			return this.errors[0].toString();
-		};
-	}
+    
+    
+    
+    
+    
+        
 
-	Trap.prototype.addTrapError = function() {
-		this.errors.push(new TrapError());
-	};
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-	return Trap;
 
-})();
-</code></pre>
-        </article>
-    </section>
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="channel">channel</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>channel</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="mikronode-ng.Channel.html">mikronode-ng.Channel</a></span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>The channel originating the trap</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="channelId">channelId</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>channelId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>The id of the channel originating the trap</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="errors">errors</h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>errors</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="mikronode-ng.TrapError.html">mikronode-ng.TrapError</a>></span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>Since multiple traps can be<br>          recieved from a single command, this array captures them all.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+    
+    
+</article>
+
+</section>  
 
 
 

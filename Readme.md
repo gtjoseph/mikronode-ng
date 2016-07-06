@@ -131,7 +131,8 @@ Promises and listens/cancels.
 ### Writing the program for the example API conversation on the [Mikrotik Wiki](http://wiki.mikrotik.com/wiki/API#.2Fcancel.2C_simultaneous_commands)
 DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)
 
-	var MikroNode = require('mikronode-ng');
+     var MikroNode = require('mikronode-ng');
+     var connection = MikroNode.getConnection('192.168.88.1','admin','password');
 	
      connection.connect(function(conn) {
 			
@@ -139,7 +140,7 @@ DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)
         var chan2=conn.openChannel(2);
         chan2.write('/interface/listen',function(chan) {
            chan.on('read',function(data) {
-              packet=api.parseItems([data])[0];
+              packet=MikroNode.parseItems(data);
               console.log('Interface change: '+JSON.stringify(packet));
            });
         });
@@ -157,7 +158,7 @@ DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)
                 chan5.closeOnDone = true;
                 chan5.write('/interface/getall',function(chan) {
                    chan.on('done',function(data) {
-                      packets=api.parseItems(data);
+                      packets=MikroNode.parseItems(data);
                       packets.forEach(function(packet) {
                           console.log('Interface: '+JSON.stringify(packet));
                       });
@@ -175,14 +176,14 @@ DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)
 
      var MikroNode = require('mikronode-ng');
 
-     var connection = MikroNode.getConnecion('192.168.88.1','admin','password');
+     var connection = MikroNode.getConnection('192.168.88.1','admin','password');
      connection.connect(function(conn) {
 
         conn.closeOnDone = true; // All channels need to complete before the connection will close.
         var listenChannel=conn.openChannel();
         listenChannel.write('/interface/listen',function(chan) {
            chan.on('read',function(data) {
-              packet=api.parseItems([data])[0];
+              packet=MikroNode.parseItems(data);
               console.log('Interface change: '+JSON.stringify(packet));
            });
         });
@@ -193,7 +194,7 @@ DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)
         actionChannel.write(['/interface/set','=disabled=no','=.id=ether1']); // don't care to do anything after it's done.
         actionChannel.write('/interface/getall',function(chan) {
            chan.on('done',function(data) {
-              packets=api.parseItems(data);
+              packets=MikroNode.parseItems(data);
               packets.forEach(function(packet) {
                   console.log('Interface: '+JSON.stringify(packet));
               });
