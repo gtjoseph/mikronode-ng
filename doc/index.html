@@ -370,7 +370,8 @@ connection.connect(function(conn) {
        });
     });
  });</code></pre><h3>Writing the program for the example API conversation on the <a href="http://wiki.mikrotik.com/wiki/API#.2Fcancel.2C_simultaneous_commands">Mikrotik Wiki</a></h3><p>DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)</p>
-<pre class="prettyprint source"><code>var MikroNode = require('mikronode-ng');
+<pre class="prettyprint source"><code> var MikroNode = require('mikronode-ng');
+ var connection = MikroNode.getConnection('192.168.88.1','admin','password');
 
  connection.connect(function(conn) {
 
@@ -378,7 +379,7 @@ connection.connect(function(conn) {
     var chan2=conn.openChannel(2);
     chan2.write('/interface/listen',function(chan) {
        chan.on('read',function(data) {
-          packet=api.parseItems([data])[0];
+          packet=MikroNode.parseItems(data);
           console.log('Interface change: '+JSON.stringify(packet));
        });
     });
@@ -396,7 +397,7 @@ connection.connect(function(conn) {
             chan5.closeOnDone = true;
             chan5.write('/interface/getall',function(chan) {
                chan.on('done',function(data) {
-                  packets=api.parseItems(data);
+                  packets=MikroNode.parseItems(data);
                   packets.forEach(function(packet) {
                       console.log('Interface: '+JSON.stringify(packet));
                   });
@@ -409,14 +410,14 @@ connection.connect(function(conn) {
  });</code></pre><h3>Simplifying the above by reducing the number of channels.</h3><p>DON'T RUN THIS IF YOU'RE CONNECTED VIA ether1! :)<br>  Notice how the callback embedding is not needed using the syncronous capability.</p>
 <pre class="prettyprint source"><code> var MikroNode = require('mikronode-ng');
 
- var connection = MikroNode.getConnecion('192.168.88.1','admin','password');
+ var connection = MikroNode.getConnection('192.168.88.1','admin','password');
  connection.connect(function(conn) {
 
     conn.closeOnDone = true; // All channels need to complete before the connection will close.
     var listenChannel=conn.openChannel();
     listenChannel.write('/interface/listen',function(chan) {
        chan.on('read',function(data) {
-          packet=api.parseItems([data])[0];
+          packet=MikroNode.parseItems(data);
           console.log('Interface change: '+JSON.stringify(packet));
        });
     });
@@ -427,7 +428,7 @@ connection.connect(function(conn) {
     actionChannel.write(['/interface/set','=disabled=no','=.id=ether1']); // don't care to do anything after it's done.
     actionChannel.write('/interface/getall',function(chan) {
        chan.on('done',function(data) {
-          packets=api.parseItems(data);
+          packets=MikroNode.parseItems(data);
           packets.forEach(function(packet) {
               console.log('Interface: '+JSON.stringify(packet));
           });
@@ -453,7 +454,7 @@ connection.getConnectPromise().then(function(conn) {
     });
 });</code></pre><p>  The methods <em>decodeLength</em> and <em>encodeString</em> were written based on code <a href="http://wiki.mikrotik.com/wiki/API_PHP_class#Class">here on the Mikrotik Wiki</a>.</p>
 <h2>License</h2><p>(The MIT License)</p>
-<p>Copyright (c) 2011-2015 Brandon Myers <a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x74;&#114;&#x61;&#x6b;&#x6b;&#x61;&#115;&#x75;&#114;&#x65;&#x40;&#103;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#109;">&#x74;&#114;&#x61;&#x6b;&#x6b;&#x61;&#115;&#x75;&#114;&#x65;&#x40;&#103;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#109;</a><br>Copyright (c) 2015 George Joseph <a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x67;&#x65;&#111;&#114;&#103;&#x65;&#x2e;&#106;&#111;&#115;&#101;&#x70;&#104;&#64;&#x66;&#97;&#105;&#x72;&#x76;&#x69;&#x65;&#x77;&#53;&#x2e;&#99;&#111;&#x6d;">&#x67;&#x65;&#111;&#114;&#103;&#x65;&#x2e;&#106;&#111;&#115;&#101;&#x70;&#104;&#64;&#x66;&#97;&#105;&#x72;&#x76;&#x69;&#x65;&#x77;&#53;&#x2e;&#99;&#111;&#x6d;</a></p>
+<p>Copyright (c) 2011-2015 Brandon Myers <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x74;&#114;&#97;&#107;&#x6b;&#97;&#x73;&#117;&#x72;&#x65;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#x74;&#114;&#97;&#107;&#x6b;&#97;&#x73;&#117;&#x72;&#x65;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a><br>Copyright (c) 2015 George Joseph <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#103;&#x65;&#x6f;&#114;&#x67;&#x65;&#46;&#106;&#x6f;&#x73;&#x65;&#112;&#104;&#64;&#x66;&#97;&#105;&#114;&#x76;&#x69;&#x65;&#x77;&#53;&#46;&#99;&#x6f;&#x6d;">&#103;&#x65;&#x6f;&#114;&#x67;&#x65;&#46;&#106;&#x6f;&#x73;&#x65;&#112;&#104;&#64;&#x66;&#97;&#105;&#114;&#x76;&#x69;&#x65;&#x77;&#53;&#46;&#99;&#x6f;&#x6d;</a></p>
 <p>Permission is hereby granted, free of charge, to any person obtaining<br>a copy of this software and associated documentation files (the<br>'Software'), to deal in the Software without restriction, including<br>without limitation the rights to use, copy, modify, merge, publish,<br>distribute, sublicense, and/or sell copies of the Software, and to<br>permit persons to whom the Software is furnished to do so, subject to<br>the following conditions:</p>
 <p>The above copyright notice and this permission notice shall be<br>included in all copies or substantial portions of the Software.</p>
 <p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br>EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br>MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br>IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br>CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br>TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br>SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></article>
@@ -467,7 +468,7 @@ connection.getConnectPromise().then(function(conn) {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Apr 15 2016 12:28:02 GMT-0600 (MDT)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Jul 06 2016 06:45:18 GMT-0600 (MDT)
         </footer>
     </div>
 </div>
