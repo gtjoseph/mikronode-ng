@@ -1,7 +1,7 @@
 {
   "name": "mikronode-ng",
   "description": "Mikrotik API implemented in Node",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "Brandon Myers <trakkasure@gmail.com>",
   "contributors": [
     {
