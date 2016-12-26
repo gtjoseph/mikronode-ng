@@ -16,6 +16,12 @@
     "socket",
     "api"
   ],
+  "scripts": {
+      "test1": "node ./test/test1.js",
+      "test2": "node ./test/test2.js",
+      "test3": "node ./test/test3.js",
+      "test4": "node ./test/test4.js"
+  },
   "repository": "git://github.com/f5eng/mikronode-ng",
   "bugs": "https://github.com/f5eng/mikronode-ng/issues",
   "main": "lib/index",
