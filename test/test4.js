@@ -21,6 +21,7 @@ connection.connect((conn) => {
         console.log(data);
     });
     chan1.once('trap', (data) => {
+        data = MikroNode.parseItems(data);
         console.log(data);
     });
     chan1.write(['/ip/address/add','=interface=ether4','=address=192.168.5.5/24']);
@@ -31,6 +32,7 @@ connection.connect((conn) => {
         console.log(data);
     });
     chan2.once('trap', (data) => {
+        data = MikroNode.parseItems(data);
         console.log(data);
     });
     chan2.write(['/ip/address/add','=interface=ether4','=address=192.168.5.6/24']);
@@ -41,6 +43,7 @@ connection.connect((conn) => {
         console.log(data);
     });
     chan3.once('trap', (data) => {
+        data = MikroNode.parseItems(data);
         console.log(data);
     });
     chan3.write(['/ip/address/add','=interface=ether4','=address=192.168.5.7/24']);
