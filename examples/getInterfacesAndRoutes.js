@@ -3,6 +3,8 @@
 /* globals Promise */
 var MikroNode = require('../lib/index.js');
 
+/* Don't be surprised if you see the output interleaved. :) */
+
 var c1 = MikroNode.getConnection(process.argv[2], process.argv[3], process.argv[4]);
 c1.closeOnDone = true;
 c1.connect(function(c) {
@@ -38,7 +40,7 @@ c1.connect(function(c) {
 /* Now let's do this with Promises */
 
 var connection = MikroNode.getConnection(process.argv[2], process.argv[3], process.argv[4], {
-	closeOnDone : true
+	closeOnDone : false
 });
 
 var connPromise = connection.getConnectPromise().then(function(conn) {
@@ -47,6 +49,7 @@ var connPromise = connection.getConnectPromise().then(function(conn) {
 	Promise.all([ chan1Promise, chan2Promise ]).then(function resolved(values) {
 		console.log('Interfaces via Promise: ' + JSON.stringify(values[0]) + '\n\n');
 		console.log('Routes via Promise: ' + JSON.stringify(values[1]) + '\n\n');
+		conn.close();
 	}, function rejected(reason) {
 		console.log('Oops: ' + reason);
 	});

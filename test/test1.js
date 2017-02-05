@@ -9,6 +9,8 @@ function VLAN(vlan) {
 	});
 }
 
+var test_interface = process.argv[5] || 'ether1';
+
 var connection = new MikroNode.Connection(process.argv[2], process.argv[3], process.argv[4], {
 	closeOnDone : true,
 	closeOnTimeout : true,
@@ -58,8 +60,8 @@ function getVlans() {
 
 function addVlan() {
 	console.log('Adding vlan ' + availableVlan);
-	var p = connection.getCommandPromise([ '/interface/vlan/add', '=name=vlan' + availableVlan, '=interface=ether1',
-			'=vlan-id=' + availableVlan ], {
+	var p = connection.getCommandPromise([ '/interface/vlan/add', '=name=vlan' + availableVlan,
+			'=interface=' + test_interface, '=vlan-id=' + availableVlan ], {
 		closeOnDone : false
 	});
 	p.then(function(values) {
@@ -75,7 +77,7 @@ function addVlan() {
 
 function listVlans() {
 	console.log('Listing vlans');
-	var p = connection.getCommandPromise('/int/vlan/print\n?interface=ether1', {
+	var p = connection.getCommandPromise('/int/vlan/print\n?interface=' + test_interface, {
 		closeOnDone : false
 	});
 	p.then(function(values) {
